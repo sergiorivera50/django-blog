@@ -1,0 +1,47 @@
+[
+	{
+		"title": "Post title 1",
+		"content": "Post content 1",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 2",
+		"content": "Post content 2",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 3",
+		"content": "Post content 3",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 4",
+		"content": "Post content 4",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 5",
+		"content": "Post content 5",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 6",
+		"content": "Post content 6",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 7",
+		"content": "Post content 7",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 8",
+		"content": "Post content 8",
+		"user_id": 1
+	},
+	{
+		"title": "Post title 9",
+		"content": "Post content 9",
+		"user_id": 1
+	}
+]
