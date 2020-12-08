@@ -35,7 +35,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-DEBUG = config['DEBUG']
+DEBUG = bool(config['DEBUG']) # 1 or 0
 SECRET_KEY = config['SECRET_KEY']
 
 ALLOWED_HOSTS = ['www.sergiorivera.blog', 'sergiorivera.blog', '178.79.187.9', '127.0.0.1']
