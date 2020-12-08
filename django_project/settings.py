@@ -22,11 +22,9 @@ PLATFORM_SYSTEM = platform.system()
 
 if PLATFORM_SYSTEM == 'Windows':
     SECRET_PATH = WINDOWS_SECRET_PATH
-    DEBUG = True
 
 if PLATFORM_SYSTEM == 'Linux':
     SECRET_PATH = LINUX_SECRET_PATH
-    DEBUG = False
 
 with open(SECRET_PATH) as config_file:
     config = json.load(config_file)
@@ -34,11 +32,10 @@ with open(SECRET_PATH) as config_file:
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+DEBUG = config['DEBUG']
 SECRET_KEY = config['SECRET_KEY']
 
 ALLOWED_HOSTS = ['www.sergiorivera.blog', 'sergiorivera.blog', '178.79.187.9', '127.0.0.1']
