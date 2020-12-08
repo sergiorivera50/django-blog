@@ -12,8 +12,19 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import json
+import platform
 
-with open('/etc/django_project/config.json') as config_file:
+WINDOWS_SECRET_PATH = 'config.json'
+LINUX_SECRET_PATH = '/etc/django_project/config.json'
+SECRET_PATH = ''
+
+if platform.system() == 'Windows':
+    SECRET_PATH = WINDOWS_SECRET_PATH
+
+if platform.system() == 'Linux':
+    SECRET_PATH = LINUX_SECRET_PATH
+
+with open(SECRET_PATH) as config_file:
     config = json.load(config_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,9 +38,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.sergiorivera.blog', 'sergiorivera.blog', '178.79.187.9']
+ALLOWED_HOSTS = ['www.sergiorivera.blog', 'sergiorivera.blog', '178.79.187.9', '127.0.0.1']
 
 
 # Application definition
