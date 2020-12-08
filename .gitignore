@@ -1,3 +1,9 @@
+# Protected data
 /config.json
+
+# Virtual Environments
+/venv/
 /windows-venv/
+
+# IDE Files
 /.idea/
