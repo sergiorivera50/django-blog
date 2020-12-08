@@ -7,3 +7,5 @@
 
 # IDE Files
 /.idea/
+
+db.sqlite3
