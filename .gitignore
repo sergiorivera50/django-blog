@@ -1,5 +1,6 @@
 # Protected data
 /config.json
+/db.sqlite3
 
 # Virtual Environments
 /venv/
