@@ -14,18 +14,20 @@ import os
 import json
 import platform
 
-WINDOWS_SECRET_PATH = 'config.json'
-LINUX_SECRET_PATH = '/etc/django_project/config.json'
+WINDOWS_CONFIG_PATH = 'config.json'
+LINUX_CONFIG_PATH = '/etc/django_project/config.json'
 SECRET_PATH = ''
 
 PLATFORM_SYSTEM = platform.system()
 
+# Dev server
 if PLATFORM_SYSTEM == 'Windows':
-    SECRET_PATH = WINDOWS_SECRET_PATH
+    SECRET_PATH = WINDOWS_CONFIG_PATH
     DEBUG = True
 
+# Production server
 if PLATFORM_SYSTEM == 'Linux':
-    SECRET_PATH = LINUX_SECRET_PATH
+    SECRET_PATH = LINUX_CONFIG_PATH
     DEBUG = False
 
 with open(SECRET_PATH) as config_file:
@@ -39,7 +41,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config['SECRET_KEY']
 
-ALLOWED_HOSTS = ['www.sergiorivera.blog', 'sergiorivera.blog', '178.79.187.9', '127.0.0.1']
+ALLOWED_HOSTS = config['ALLOWED_HOSTS']
 
 
 # Application definition
