@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.views.generic import (
     ListView,
     DetailView,
@@ -61,6 +62,25 @@ class AnnouncementListView(ListView):
 # default context_object_name = object
 class PostDetailView(DetailView):
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=context['object'])
+        return context
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        form.instance.post = post
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post-detail', kwargs={'pk': self.object.post.pk})
 
 
 # CREATE VIEW for Post #
