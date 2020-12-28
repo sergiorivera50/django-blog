@@ -8,8 +8,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post
-
+from .models import Post, Comment
 
 ''' Function based view of home
 def home(request):
@@ -20,6 +19,7 @@ def home(request):
 '''
 
 
+# LIST VIEW for all Post #
 # template convention for class views => <app>/<model>_<viewtype>.html
 # default context_object_name = object
 class PostListView(ListView):
@@ -33,6 +33,7 @@ class PostListView(ListView):
         return Post.objects.filter(announcement=False).order_by('-date_posted')
 
 
+# LIST VIEW for all Post of one User #
 class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
@@ -44,6 +45,7 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user, announcement=False).order_by('-date_posted')
 
 
+# LIST VIEW for Announcement #
 class AnnouncementListView(ListView):
     model = Post
     template_name = 'blog/announcements.html'
@@ -54,12 +56,14 @@ class AnnouncementListView(ListView):
         return Post.objects.filter(announcement=True).order_by('-date_posted')
 
 
+# DETAIL VIEW for Post #
 # <app>/<model>_detail.html
 # default context_object_name = object
 class PostDetailView(DetailView):
     model = Post
 
 
+# CREATE VIEW for Post #
 # <app>/<model>_form.html
 # default context_object_name = form
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -71,6 +75,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+# CREATE VIEW for Announcement #
 class AnnouncementCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['title', 'content', 'announcement']
@@ -84,6 +89,7 @@ class AnnouncementCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView
         return self.request.user.is_staff or self.request.user.is_superuser
 
 
+# UPDATE VIEW for Post #
 # no template required
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -98,6 +104,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
 
+# DELETE VIEW for Post #
 # <app>/<model>_confirm_delete.html
 # default context_object_name = object
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

@@ -20,10 +20,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.author) + " " + str(self.date_posted)
+        return "Comment by {} on {}".format(str(self.author), str(self.date_posted))
