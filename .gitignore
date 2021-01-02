@@ -1,6 +1,11 @@
-# Protected data
+# API Key + allowed hosts
 /config.json
+
+# Database
 /db.sqlite3
+
+# Utility scripts
+/pull_version.sh
 
 # Virtual Environments
 /venv/
